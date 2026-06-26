@@ -1,551 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Plodroid</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plodroid</title>
 
-<style>
-:root{
-  --bg:#000;
-  --text:#fff;
-  --border:rgba(255,255,255,0.08);
-  --ease:cubic-bezier(0.16, 1, 0.3, 1);
-}
+  <!-- meta tags from the provided <head> block -->
+  <meta name="description" content="Plodroid - Tech Helper, Designer, and Minecraft Creator. Explore my thumbnails, profile pictures, skins, and projects.">
+  <meta name="keywords" content="Plodroid, Minecraft, Designer, Thumbnail Designer, Profile Pictures, Tech Helper, Minecraft Creator">
+  <meta name="author" content="Plodroid">
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",
-  "Segoe UI",Helvetica,Arial,sans-serif;
-}
+  <!-- Open Graph / Discord / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Plodroid">
+  <meta property="og:description" content="Tech Helper • Designer • Minecraft Creator">
+  <meta property="og:url" content="https://plodroid.github.io/portfolio.com/">
+  <meta property="og:image" content="https://plodroid.github.io/portfolio.com/Thumbnail1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-body{
-  background:#000;
-  color:#fff;
-  overflow-x:hidden;
-}
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Plodroid">
+  <meta name="twitter:description" content="Tech Helper • Designer • Minecraft Creator">
+  <meta name="twitter:image" content="https://plodroid.github.io/portfolio.com/Thumbnail1.png">
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity:0.04;
-  pointer-events:none;
-}
+  <meta name="theme-color" content="#000000">
 
-.toggle{
-  position:fixed;
-  top:14px;
-  left:14px;
-  z-index:2000;
-  background:transparent;
-  border:1px solid var(--border);
-  color:#fff;
-  padding:7px 10px;
-  border-radius:8px;
-  cursor:pointer;
-}
+  <style>
+    /* ----- root & reset (from given style) ----- */
+    :root {
+      --bg: #000;
+      --text: #fff;
+      --border: rgba(255, 255, 255, 0.08);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-.sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  height:100vh;
-  width:240px;
-  border-right:1px solid var(--border);
-  padding:60px 20px 20px 20px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  background:rgba(0,0,0,0.9);
-  backdrop-filter:blur(12px);
-  transition:.6s var(--ease);
-  z-index:1000;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif;
+    }
 
-.sidebar.closed{
-  transform:translateX(-100%);
-  opacity:0;
-  pointer-events:none;
-}
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-.logo{
-  font-weight:600;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity: 0.04;
+      pointer-events: none;
+    }
 
-.nav a{
-  display:block;
-  color:#fff;
-  text-decoration:none;
-  font-size:14px;
-  padding:8px;
-  border-radius:8px;
-}
+    /* ----- toggle / sidebar / main (from original) ----- */
+    .toggle {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 2000;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 7px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-.nav a:hover{
-  background:rgba(255,255,255,0.06);
-}
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 240px;
+      border-right: 1px solid var(--border);
+      padding: 60px 20px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(12px);
+      transition: .6s var(--ease);
+      z-index: 1000;
+    }
 
-.social{
-  margin-top:auto;
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
+    .sidebar.closed {
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
 
-.social a{
-  color:#fff;
-  text-decoration:none;
-  font-size:13px;
-}
+    .logo {
+      font-weight: 600;
+    }
 
-main{
-  margin-left:240px;
-  transition:.6s var(--ease);
-}
+    .nav a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px;
+      border-radius: 8px;
+    }
 
-.sidebar.closed ~ main{
-  margin-left:0;
-}
+    .nav a:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
 
-section{
-  padding:70px 9vw;
-}
+    .social {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
-.about-wrap{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:40px;
-}
+    .social a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+    }
 
-.about-text{
-  max-width:520px;
-}
+    main {
+      margin-left: 240px;
+      transition: .6s var(--ease);
+    }
 
-h1{
-  font-size:2.8rem;
-  letter-spacing:-0.03em;
-}
+    .sidebar.closed~main {
+      margin-left: 0;
+    }
 
-p{
-  margin-top:10px;
-}
+    section {
+      padding: 70px 9vw;
+    }
 
-#skin_container{
-  width:340px;
-  height:340px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  overflow:hidden;
-  background:#0a0a0a;
-}
+    .about-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
 
-.accordion{
-  margin-top:18px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
+    .about-text {
+      max-width: 520px;
+    }
 
-.acc-item{
-  border:1px solid var(--border);
-  border-radius:10px;
-  overflow:hidden;
-}
+    h1 {
+      font-size: 2.8rem;
+      letter-spacing: -0.03em;
+    }
 
-.acc-header{
-  padding:10px;
-  cursor:pointer;
-  background:rgba(255,255,255,0.02);
-}
+    p {
+      margin-top: 10px;
+    }
 
-.acc-content{
-  max-height:0;
-  overflow:hidden;
-  transition:.6s var(--ease);
-  opacity:0;
-  padding:0 10px;
-}
+    #skin_container {
+      width: 340px;
+      height: 340px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
 
-.acc-item.active .acc-content{
-  max-height:420px;
-  opacity:1;
-  padding:10px;
-  overflow-y:auto;
-}
+    .accordion {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
+    .acc-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
 
-.grid img{
-  width:100%;
-  border-radius:8px;
-  cursor:pointer;
-}
+    .acc-header {
+      padding: 10px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.02);
+    }
 
-.soon{
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:rgba(255,255,255,0.02);
-  font-size:13px;
-  margin-top:10px;
-}
+    .acc-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: .6s var(--ease);
+      opacity: 0;
+      padding: 0 10px;
+    }
 
-.contact a{
-  display:block;
-  padding:10px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  margin-top:8px;
-  text-decoration:none;
-  color:#fff;
-}
+    .acc-item.active .acc-content {
+      max-height: 420px;
+      opacity: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
 
-#lightbox{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.92);
-  backdrop-filter:blur(12px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:3000;
-  cursor:zoom-out;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
 
-#lightbox-img{
-  max-width:90vw;
-  max-height:90vh;
-  border-radius:12px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
-  transition:opacity 0.3s;
-  object-fit:contain;
-}
+    .grid img {
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-#lightbox-close{
-  position:absolute;
-  top:20px;
-  right:30px;
-  font-size:40px;
-  color:#fff;
-  cursor:pointer;
-  z-index:3001;
-  transition:0.3s;
-}
+    .soon {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 13px;
+      margin-top: 10px;
+    }
 
-#lightbox-close:hover{
-  color:#aaa;
-}
+    .contact a {
+      display: block;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-top: 8px;
+      text-decoration: none;
+      color: #fff;
+    }
 
-#lightbox-left, #lightbox-right{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:50px;
-  color:#fff;
-  background:rgba(255,255,255,0.1);
-  border-radius:50%;
-  width:60px;
-  height:60px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  transition:background 0.3s;
-  z-index:3001;
-  user-select:none;
-}
+    /* lightbox */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(12px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      cursor: zoom-out;
+    }
 
-#lightbox-left:hover, #lightbox-right:hover{
-  background:rgba(255,255,255,0.3);
-}
+    #lightbox-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      transition: opacity 0.3s;
+      object-fit: contain;
+    }
 
-#lightbox-left{
-  left:20px;
-}
+    #lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 3001;
+      transition: 0.3s;
+    }
 
-#lightbox-right{
-  right:20px;
-}
+    #lightbox-close:hover {
+      color: #aaa;
+    }
 
-#lightbox-counter{
-  position:absolute;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-  color:#fff;
-  font-size:16px;
-  background:rgba(0,0,0,0.5);
-  padding:5px 15px;
-  border-radius:20px;
-  z-index:3001;
-}
+    #lightbox-left,
+    #lightbox-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 50px;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 3001;
+      user-select: none;
+    }
 
-@media(max-width:900px){
-  main{margin-left:0}
-  .about-wrap{flex-direction:column;align-items:flex-start}
-  #skin_container{width:100%;height:320px}
-  .grid{grid-template-columns:repeat(2,1fr)}
-}
-</style>
+    #lightbox-left:hover,
+    #lightbox-right:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    #lightbox-left {
+      left: 20px;
+    }
+
+    #lightbox-right {
+      right: 20px;
+    }
+
+    #lightbox-counter {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 16px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 5px 15px;
+      border-radius: 20px;
+      z-index: 3001;
+    }
+
+    @media(max-width:900px) {
+      main {
+        margin-left: 0;
+      }
+      .about-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      #skin_container {
+        width: 100%;
+        height: 320px;
+      }
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<button class="toggle">☰</button>
+  <button class="toggle">☰</button>
 
-<aside class="sidebar">
-
-  <div class="logo">Plodroid</div>
-
-  <div class="nav">
-    <a href="#about">About</a>
-    <a href="#work">Work</a>
-    <a href="#contact">Contact</a>
-  </div>
-
-  <div class="social">
-    <a href="https://discord.com/users/plodroid2">Discord: plodroid2</a>
-    <a href="https://discord.gg/d3pgCJ5WYM">Discord Server: ployd dungeon</a>
-    <a href="https://youtube.com/@plodroid">YouTube: @plodroid</a>
-    <a href="https://github.com/plodroid">GitHub: @plodroid</a>
-  </div>
-
-</aside>
-
-<main>
-
-<section id="about">
-  <div class="about-wrap">
-
-    <div class="about-text">
-      <h1>Plodroid</h1>
-      <p>Tech helper • Designer • Minecraft Creator</p>
-      <p>I build clean systems, Minecraft content, and I like to experiment with thumbnails etc.</p>
-      <p>I created this very website, I created the content you see below And if you want to know more about my work, feel free to reach out.</p>
-      <p>Please consider supporting my work by following me on my social media platforms or purchasing my creations.</p>
+  <aside class="sidebar">
+    <div class="logo">Plodroid</div>
+    <div class="nav">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
     </div>
+    <div class="social">
+      <a href="https://discord.com/users/plodroid2">Discord: plodroid2</a>
+      <a href="https://discord.gg/d3pgCJ5WYM">Discord Server: ployd dungeon</a>
+      <a href="https://youtube.com/@plodroid">YouTube: @plodroid</a>
+      <a href="https://github.com/plodroid">GitHub: @plodroid</a>
+    </div>
+  </aside>
 
-    <div id="skin_container"></div>
+  <main>
 
-  </div>
-</section>
-
-<section id="work">
-  <h1>Work</h1>
-
-  <div class="accordion">
-
-    <div class="acc-item">
-      <div class="acc-header">Thumbnail</div>
-      <div class="acc-content">
-        <div class="grid">
-          <img src="Thumbnail1.png">
-          <img src="Thumbnail4.png">
-          <img src="Thumbnail2.png">
-          <img src="Thumbnail3.png">
+    <section id="about">
+      <div class="about-wrap">
+        <div class="about-text">
+          <h1>Plodroid</h1>
+          <p>Tech helper • Designer • Minecraft Creator</p>
+          <p>I build clean systems, Minecraft content, and I like to experiment with thumbnails etc.</p>
+          <p>I created this very website, I created the content you see below And if you want to know more about my work, feel free to reach out.</p>
+          <p>Please consider supporting my work by following me on my social media platforms or purchasing my creations.</p>
         </div>
+        <div id="skin_container"></div>
       </div>
-    </div>
+    </section>
 
-    <div class="acc-item">
-      <div class="acc-header">Profile Pictures</div>
-      <div class="acc-content">
-        <div class="grid">
-          <img src="pfp5.png">
-          <img src="pfp4.png">
-          <img src="pfp3.png">
-          <img src="pfp2.png">
-          <img src="pfp1.png">
+    <section id="work">
+      <h1>Work</h1>
+      <div class="accordion">
+
+        <div class="acc-item">
+          <div class="acc-header">Thumbnail</div>
+          <div class="acc-content">
+            <div class="grid">
+              <img src="Thumbnail1.png" alt="thumbnail 1">
+              <img src="Thumbnail4.png" alt="thumbnail 4">
+              <img src="Thumbnail2.png" alt="thumbnail 2">
+              <img src="Thumbnail3.png" alt="thumbnail 3">
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="acc-item">
-      <div class="acc-header">Skins</div>
-      <div class="acc-content">
-        <div class="soon">
-          Skins coming soon. Custom Minecraft skins is still in development. But it is Still buyable, Dm me For more information.
+        <div class="acc-item">
+          <div class="acc-header">Profile Pictures</div>
+          <div class="acc-content">
+            <div class="grid">
+              <img src="pfp5.png" alt="pfp 5">
+              <img src="pfp4.png" alt="pfp 4">
+              <img src="pfp3.png" alt="pfp 3">
+              <img src="pfp2.png" alt="pfp 2">
+              <img src="pfp1.png" alt="pfp 1">
+            </div>
+          </div>
         </div>
+
+        <div class="acc-item">
+          <div class="acc-header">Skins</div>
+          <div class="acc-content">
+            <div class="soon">
+              Skins coming soon. Custom Minecraft skins is still in development. But it is Still buyable, Dm me For more information.
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </section>
 
+    <section id="contact">
+      <h1>Contact</h1>
+      <div class="contact">
+        <a href="https://discord.com/users/plodroid2">Discord: plodroid2</a>
+        <a href="https://discord.gg/d3pgCJ5WYM">Discord Server: ployd dungeon</a>
+        <a href="https://youtube.com/@plodroid">YouTube: @plodroid</a>
+        <a href="https://github.com/plodroid">GitHub: @plodroid</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- lightbox -->
+  <div id="lightbox">
+    <div id="lightbox-close">&times;</div>
+    <div id="lightbox-left">&#10094;</div>
+    <img id="lightbox-img" src="" alt="enlarged view">
+    <div id="lightbox-right">&#10095;</div>
+    <div id="lightbox-counter"></div>
   </div>
-</section>
 
-<section id="contact">
-  <h1>Contact</h1>
+  <script src="https://unpkg.com/skinview3d/bundles/skinview3d.bundle.js">
+  </script>
 
-  <div class="contact">
-    <a href="https://discord.com/users/plodroid2">Discord: plodroid2</a>
-    <a href="https://discord.gg/d3pgCJ5WYM">Discord Server: ployd dungeon</a>
-    <a href="https://youtube.com/@plodroid">YouTube: @plodroid</a>
-    <a href="https://github.com/plodroid">GitHub: @plodroid</a>
-  </div>
-</section>
+  <script>
+    (function() {
+      // sidebar toggle
+      const sidebar = document.querySelector(".sidebar");
+      const toggleBtn = document.querySelector(".toggle");
 
-</main>
+      function handleSidebarOnMobile() {
+        if (window.innerWidth <= 900) {
+          sidebar.classList.add("closed");
+        } else {
+          sidebar.classList.remove("closed");
+        }
+      }
+      handleSidebarOnMobile();
+      window.addEventListener("resize", handleSidebarOnMobile);
 
-<div id="lightbox">
-  <div id="lightbox-close">&times;</div>
-  <div id="lightbox-left">&#10094;</div>
-  <img id="lightbox-img" src="" alt="enlarged view">
-  <div id="lightbox-right">&#10095;</div>
-  <div id="lightbox-counter"></div>
-</div>
+      toggleBtn.onclick = function() {
+        sidebar.classList.toggle("closed");
+      };
 
-<script src="https://unpkg.com/skinview3d/bundles/skinview3d.bundle.js"></script>
+      // accordion
+      document.querySelectorAll(".acc-item").forEach(item => {
+        item.querySelector(".acc-header").onclick = function() {
+          item.classList.toggle("active");
+        };
+      });
 
-<script>
+      // skin viewer
+      const container = document.getElementById("skin_container");
+      let skinUrl = "https://minotar.net/skin/realPlodroid?t=" + Date.now();
 
-const sidebar = document.querySelector(".sidebar");
-const toggleBtn = document.querySelector(".toggle");
+      const viewer = new skinview3d.SkinViewer({
+        canvas: document.createElement("canvas"),
+        width: 340,
+        height: 340,
+        skin: skinUrl
+      });
 
-function handleSidebarOnMobile() {
-  if (window.innerWidth <= 900) {
-    sidebar.classList.add("closed");
-  } else {
-    sidebar.classList.remove("closed");
-  }
-}
+      container.appendChild(viewer.canvas);
+      viewer.zoom = 0.75;
+      viewer.animation = new skinview3d.WalkingAnimation();
 
-handleSidebarOnMobile();
-window.addEventListener("resize", handleSidebarOnMobile);
+      setInterval(() => {
+        viewer.loadSkin("https://minotar.net/skin/realPlodroid?t=" + Date.now());
+      }, 60000);
 
-toggleBtn.onclick = ()=>{
-  sidebar.classList.toggle("closed");
-};
+      window.addEventListener("resize", function() {
+        const w = container.clientWidth;
+        viewer.width = w;
+        viewer.height = w;
+      });
 
-document.querySelectorAll(".acc-item").forEach(item=>{
-  item.querySelector(".acc-header").onclick = ()=>{
-    item.classList.toggle("active");
-  };
-});
+      // lightbox
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const lightboxCounter = document.getElementById("lightbox-counter");
+      const leftArrow = document.getElementById("lightbox-left");
+      const rightArrow = document.getElementById("lightbox-right");
+      const closeBtn = document.getElementById("lightbox-close");
 
-const container = document.getElementById("skin_container");
+      let currentGalleryImages = [];
+      let currentIndex = 0;
 
-let skinUrl = "https://minotar.net/skin/realPlodroid?t=" + Date.now();
+      function openLightbox(imgElement) {
+        const grid = imgElement.closest('.grid');
+        if (!grid) return;
+        const images = Array.from(grid.querySelectorAll('img'));
+        if (images.length === 0) return;
+        currentGalleryImages = images;
+        currentIndex = images.indexOf(imgElement);
+        showLightboxImage(images[currentIndex].src);
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        updateCounter();
+      }
 
-const viewer = new skinview3d.SkinViewer({
-  canvas: document.createElement("canvas"),
-  width: 340,
-  height: 340,
-  skin: skinUrl
-});
+      function showLightboxImage(src) {
+        lightboxImg.style.opacity = 0;
+        setTimeout(() => {
+          lightboxImg.src = src;
+          lightboxImg.style.opacity = 1;
+        }, 150);
+      }
 
-container.appendChild(viewer.canvas);
+      function updateCounter() {
+        lightboxCounter.textContent = (currentIndex + 1) + ' / ' + currentGalleryImages.length;
+      }
 
-viewer.zoom = 0.75;
-viewer.animation = new skinview3d.WalkingAnimation();
+      function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = '';
+      }
 
-setInterval(()=>{
-  viewer.loadSkin("https://minotar.net/skin/realPlodroid?t=" + Date.now());
-}, 60000);
+      document.querySelectorAll(".grid img").forEach(img => {
+        img.addEventListener("click", function(e) {
+          openLightbox(e.target);
+        });
+      });
 
-window.addEventListener("resize", ()=>{
-  const w = container.clientWidth;
-  viewer.width = w;
-  viewer.height = w;
-});
+      lightbox.addEventListener("click", function(e) {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
 
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const lightboxCounter = document.getElementById("lightbox-counter");
-const leftArrow = document.getElementById("lightbox-left");
-const rightArrow = document.getElementById("lightbox-right");
-const closeBtn = document.getElementById("lightbox-close");
+      closeBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        closeLightbox();
+      });
 
-let currentGalleryImages = [];
-let currentIndex = 0;
+      leftArrow.addEventListener("click", function(e) {
+        e.stopPropagation();
+        if (currentIndex > 0) {
+          currentIndex--;
+          showLightboxImage(currentGalleryImages[currentIndex].src);
+          updateCounter();
+        }
+      });
 
-function openLightbox(imgElement) {
-  const grid = imgElement.closest('.grid');
-  if (!grid) return;
-  const images = Array.from(grid.querySelectorAll('img'));
-  if (images.length === 0) return;
-  currentGalleryImages = images;
-  currentIndex = images.indexOf(imgElement);
-  showLightboxImage(images[currentIndex].src);
-  lightbox.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  updateCounter();
-}
+      rightArrow.addEventListener("click", function(e) {
+        e.stopPropagation();
+        if (currentIndex < currentGalleryImages.length - 1) {
+          currentIndex++;
+          showLightboxImage(currentGalleryImages[currentIndex].src);
+          updateCounter();
+        }
+      });
 
-function showLightboxImage(src) {
-  lightboxImg.style.opacity = 0;
-  setTimeout(() => {
-    lightboxImg.src = src;
-    lightboxImg.style.opacity = 1;
-  }, 150);
-}
-
-function updateCounter() {
-  lightboxCounter.textContent = `${currentIndex+1} / ${currentGalleryImages.length}`;
-}
-
-function closeLightbox() {
-  lightbox.style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-document.querySelectorAll(".grid img").forEach(img => {
-  img.addEventListener("click", (e) => {
-    openLightbox(e.target);
-  });
-});
-
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) {
-    closeLightbox();
-  }
-});
-
-closeBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  closeLightbox();
-});
-
-leftArrow.addEventListener("click", (e) => {
-  e.stopPropagation();
-  if (currentIndex > 0) {
-    currentIndex--;
-    showLightboxImage(currentGalleryImages[currentIndex].src);
-    updateCounter();
-  }
-});
-
-rightArrow.addEventListener("click", (e) => {
-  e.stopPropagation();
-  if (currentIndex < currentGalleryImages.length - 1) {
-    currentIndex++;
-    showLightboxImage(currentGalleryImages[currentIndex].src);
-    updateCounter();
-  }
-});
-
-document.addEventListener("keydown", (e) => {
-  if (lightbox.style.display === 'flex') {
-    if (e.key === "Escape") {
-      closeLightbox();
-    } else if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      leftArrow.click();
-    } else if (e.key === "ArrowRight") {
-      e.preventDefault();
-      rightArrow.click();
-    }
-  }
-});
-
-</script>
+      document.addEventListener("keydown", function(e) {
+        if (lightbox.style.display === 'flex') {
+          if (e.key === "Escape") {
+            closeLightbox();
+          } else if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            leftArrow.click();
+          } else if (e.key === "ArrowRight") {
+            e.preventDefault();
+            rightArrow.click();
+          }
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
