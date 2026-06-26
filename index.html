@@ -4,13 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plodroid</title>
-
-  <!-- meta tags from the provided <head> block -->
   <meta name="description" content="Plodroid - Tech Helper, Designer, and Minecraft Creator. Explore my thumbnails, profile pictures, skins, and projects.">
   <meta name="keywords" content="Plodroid, Minecraft, Designer, Thumbnail Designer, Profile Pictures, Tech Helper, Minecraft Creator">
   <meta name="author" content="Plodroid">
-
-  <!-- Open Graph / Discord / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Plodroid">
   <meta property="og:description" content="Tech Helper • Designer • Minecraft Creator">
@@ -18,37 +14,29 @@
   <meta property="og:image" content="https://plodroid.github.io/portfolio.com/Thumbnail1.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-
-  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Plodroid">
   <meta name="twitter:description" content="Tech Helper • Designer • Minecraft Creator">
   <meta name="twitter:image" content="https://plodroid.github.io/portfolio.com/Thumbnail1.png">
-
   <meta name="theme-color" content="#000000">
-
   <style>
-    /* ----- root & reset (from given style) ----- */
     :root {
       --bg: #000;
       --text: #fff;
       --border: rgba(255, 255, 255, 0.08);
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif;
     }
-
     body {
       background: #000;
       color: #fff;
       overflow-x: hidden;
     }
-
     body::before {
       content: "";
       position: fixed;
@@ -57,8 +45,6 @@
       opacity: 0.04;
       pointer-events: none;
     }
-
-    /* ----- toggle / sidebar / main (from original) ----- */
     .toggle {
       position: fixed;
       top: 14px;
@@ -71,7 +57,6 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     .sidebar {
       position: fixed;
       left: 0;
@@ -88,17 +73,14 @@
       transition: .6s var(--ease);
       z-index: 1000;
     }
-
     .sidebar.closed {
       transform: translateX(-100%);
       opacity: 0;
       pointer-events: none;
     }
-
     .logo {
       font-weight: 600;
     }
-
     .nav a {
       display: block;
       color: #fff;
@@ -107,57 +89,46 @@
       padding: 8px;
       border-radius: 8px;
     }
-
     .nav a:hover {
       background: rgba(255, 255, 255, 0.06);
     }
-
     .social {
       margin-top: auto;
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
-
     .social a {
       color: #fff;
       text-decoration: none;
       font-size: 13px;
     }
-
     main {
       margin-left: 240px;
       transition: .6s var(--ease);
     }
-
     .sidebar.closed~main {
       margin-left: 0;
     }
-
     section {
       padding: 70px 9vw;
     }
-
     .about-wrap {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 40px;
     }
-
     .about-text {
       max-width: 520px;
     }
-
     h1 {
       font-size: 2.8rem;
       letter-spacing: -0.03em;
     }
-
     p {
       margin-top: 10px;
     }
-
     #skin_container {
       width: 340px;
       height: 340px;
@@ -166,26 +137,22 @@
       overflow: hidden;
       background: #0a0a0a;
     }
-
     .accordion {
       margin-top: 18px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-
     .acc-item {
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
     }
-
     .acc-header {
       padding: 10px;
       cursor: pointer;
       background: rgba(255, 255, 255, 0.02);
     }
-
     .acc-content {
       max-height: 0;
       overflow: hidden;
@@ -193,26 +160,22 @@
       opacity: 0;
       padding: 0 10px;
     }
-
     .acc-item.active .acc-content {
       max-height: 420px;
       opacity: 1;
       padding: 10px;
       overflow-y: auto;
     }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 8px;
     }
-
     .grid img {
       width: 100%;
       border-radius: 8px;
       cursor: pointer;
     }
-
     .soon {
       padding: 12px;
       border: 1px solid var(--border);
@@ -221,7 +184,6 @@
       font-size: 13px;
       margin-top: 10px;
     }
-
     .contact a {
       display: block;
       padding: 10px;
@@ -231,8 +193,6 @@
       text-decoration: none;
       color: #fff;
     }
-
-    /* lightbox */
     #lightbox {
       position: fixed;
       inset: 0;
@@ -244,7 +204,6 @@
       z-index: 3000;
       cursor: zoom-out;
     }
-
     #lightbox-img {
       max-width: 90vw;
       max-height: 90vh;
@@ -253,7 +212,6 @@
       transition: opacity 0.3s;
       object-fit: contain;
     }
-
     #lightbox-close {
       position: absolute;
       top: 20px;
@@ -264,11 +222,9 @@
       z-index: 3001;
       transition: 0.3s;
     }
-
     #lightbox-close:hover {
       color: #aaa;
     }
-
     #lightbox-left,
     #lightbox-right {
       position: absolute;
@@ -288,20 +244,16 @@
       z-index: 3001;
       user-select: none;
     }
-
     #lightbox-left:hover,
     #lightbox-right:hover {
       background: rgba(255, 255, 255, 0.3);
     }
-
     #lightbox-left {
       left: 20px;
     }
-
     #lightbox-right {
       right: 20px;
     }
-
     #lightbox-counter {
       position: absolute;
       bottom: 30px;
@@ -314,7 +266,6 @@
       border-radius: 20px;
       z-index: 3001;
     }
-
     @media(max-width:900px) {
       main {
         margin-left: 0;
@@ -333,11 +284,8 @@
     }
   </style>
 </head>
-
 <body>
-
   <button class="toggle">☰</button>
-
   <aside class="sidebar">
     <div class="logo">Plodroid</div>
     <div class="nav">
@@ -352,9 +300,7 @@
       <a href="https://github.com/plodroid">GitHub: @plodroid</a>
     </div>
   </aside>
-
   <main>
-
     <section id="about">
       <div class="about-wrap">
         <div class="about-text">
@@ -367,11 +313,9 @@
         <div id="skin_container"></div>
       </div>
     </section>
-
     <section id="work">
       <h1>Work</h1>
       <div class="accordion">
-
         <div class="acc-item">
           <div class="acc-header">Thumbnail</div>
           <div class="acc-content">
@@ -383,7 +327,6 @@
             </div>
           </div>
         </div>
-
         <div class="acc-item">
           <div class="acc-header">Profile Pictures</div>
           <div class="acc-content">
@@ -396,7 +339,6 @@
             </div>
           </div>
         </div>
-
         <div class="acc-item">
           <div class="acc-header">Skins</div>
           <div class="acc-content">
@@ -405,10 +347,8 @@
             </div>
           </div>
         </div>
-
       </div>
     </section>
-
     <section id="contact">
       <h1>Contact</h1>
       <div class="contact">
@@ -418,10 +358,7 @@
         <a href="https://github.com/plodroid">GitHub: @plodroid</a>
       </div>
     </section>
-
   </main>
-
-  <!-- lightbox -->
   <div id="lightbox">
     <div id="lightbox-close">&times;</div>
     <div id="lightbox-left">&#10094;</div>
@@ -429,13 +366,10 @@
     <div id="lightbox-right">&#10095;</div>
     <div id="lightbox-counter"></div>
   </div>
-
   <script src="https://unpkg.com/skinview3d/bundles/skinview3d.bundle.js">
   </script>
-
   <script>
     (function() {
-      // sidebar toggle
       const sidebar = document.querySelector(".sidebar");
       const toggleBtn = document.querySelector(".toggle");
 
@@ -453,14 +387,12 @@
         sidebar.classList.toggle("closed");
       };
 
-      // accordion
       document.querySelectorAll(".acc-item").forEach(item => {
         item.querySelector(".acc-header").onclick = function() {
           item.classList.toggle("active");
         };
       });
 
-      // skin viewer
       const container = document.getElementById("skin_container");
       let skinUrl = "https://minotar.net/skin/realPlodroid?t=" + Date.now();
 
@@ -485,7 +417,6 @@
         viewer.height = w;
       });
 
-      // lightbox
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
       const lightboxCounter = document.getElementById("lightbox-counter");
@@ -576,6 +507,5 @@
       });
     })();
   </script>
-
 </body>
 </html>
