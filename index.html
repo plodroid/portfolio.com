@@ -407,22 +407,28 @@
 
       const container = document.getElementById("skin_container");
 
-const viewer = new skinview3d.SkinViewer({
-  canvas: document.createElement("canvas"),
-  width: 340,
-  height: 340,
-  skin: "https://minotar.net/skin/realPlodroid?t=" + Date.now() // Fresh on every page load
-});
+      const skinUrl = "https://mc-heads.net/skin/realPlodroid";
 
-container.appendChild(viewer.canvas);
-viewer.zoom = 0.75;
-viewer.animation = new skinview3d.WalkingAnimation();
+      const viewer = new skinview3d.SkinViewer({
+        canvas: document.createElement("canvas"),
+        width: 340,
+        height: 340,
+        skin: skinUrl
+      });
 
-window.addEventListener("resize", function() {
-  const w = container.clientWidth;
-  viewer.width = w;
-  viewer.height = w;
-});
+      container.appendChild(viewer.canvas);
+      viewer.zoom = 0.75;
+      viewer.animation = new skinview3d.WalkingAnimation();
+
+      function resizeSkinViewer() {
+        const w = container.clientWidth;
+        if (w > 0) {
+          viewer.width = w;
+          viewer.height = w;
+        }
+      }
+      window.addEventListener("resize", resizeSkinViewer);
+      setTimeout(resizeSkinViewer, 50);
 
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
