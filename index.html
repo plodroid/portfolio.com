@@ -406,28 +406,23 @@
       });
 
       const container = document.getElementById("skin_container");
-      let skinUrl = "https://minotar.net/skin/realPlodroid?t=" + Date.now();
 
-      const viewer = new skinview3d.SkinViewer({
-        canvas: document.createElement("canvas"),
-        width: 340,
-        height: 340,
-        skin: skinUrl
-      });
+const viewer = new skinview3d.SkinViewer({
+  canvas: document.createElement("canvas"),
+  width: 340,
+  height: 340,
+  skin: "https://minotar.net/skin/realPlodroid?t=" + Date.now() // Fresh on every page load
+});
 
-      container.appendChild(viewer.canvas);
-      viewer.zoom = 0.75;
-      viewer.animation = new skinview3d.WalkingAnimation();
+container.appendChild(viewer.canvas);
+viewer.zoom = 0.75;
+viewer.animation = new skinview3d.WalkingAnimation();
 
-      setInterval(() => {
-        viewer.loadSkin("https://minotar.net/skin/realPlodroid?t=" + Date.now());
-      }, 60000);
-
-      window.addEventListener("resize", function() {
-        const w = container.clientWidth;
-        viewer.width = w;
-        viewer.height = w;
-      });
+window.addEventListener("resize", function() {
+  const w = container.clientWidth;
+  viewer.width = w;
+  viewer.height = w;
+});
 
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
