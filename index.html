@@ -266,6 +266,177 @@
       border-radius: 20px;
       z-index: 3001;
     }
+
+    /* Analytics Styles - Hidden by default */
+    #analytics-panel {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 400px;
+      max-height: 80vh;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      z-index: 9999;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      font-size: 13px;
+    }
+    #analytics-panel.visible {
+      display: block;
+    }
+    #analytics-panel h3 {
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+    #analytics-panel .stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    #analytics-panel .stat-label {
+      color: #aaa;
+    }
+    #analytics-panel .stat-value {
+      color: #fff;
+      font-weight: 600;
+    }
+    #analytics-panel .image-clicks {
+      margin-top: 12px;
+    }
+    #analytics-panel .image-clicks .click-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    #analytics-panel .click-item .img-name {
+      color: #ccc;
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #analytics-panel .click-item .click-count {
+      color: #00ff88;
+      font-weight: 600;
+    }
+    #analytics-panel .close-analytics {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    #analytics-panel .close-analytics:hover {
+      color: #fff;
+    }
+    #analytics-panel .analytics-secret {
+      font-size: 11px;
+      color: #555;
+      margin-top: 12px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 12px;
+    }
+
+    /* Analytics toggle button - hidden by default, shown with secret key combo */
+    #analytics-toggle {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9998;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      backdrop-filter: blur(10px);
+    }
+    #analytics-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Password Overlay */
+    #analytics-password-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(20px);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+    }
+    #analytics-password-overlay.visible {
+      display: flex;
+    }
+    #analytics-password-overlay .box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      min-width: 320px;
+      text-align: center;
+    }
+    #analytics-password-overlay .box h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    #analytics-password-overlay .box p {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+    #analytics-password-overlay .box input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+    #analytics-password-overlay .box input:focus {
+      border-color: #fff;
+    }
+    #analytics-password-overlay .box button {
+      margin-top: 12px;
+      padding: 10px 30px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    #analytics-password-overlay .box button:hover {
+      background: #ddd;
+    }
+    #analytics-password-overlay .box .error {
+      color: #ff4444;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+
     @media(max-width:900px) {
       main {
         margin-left: 0;
@@ -280,6 +451,12 @@
       }
       .grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+      #analytics-panel {
+        width: 90%;
+        right: 5%;
+        bottom: 10px;
+        max-height: 70vh;
       }
     }
   </style>
@@ -319,25 +496,25 @@
         <div class="acc-item">
           <div class="acc-header">Thumbnail</div>
           <div class="acc-content">
-            <div class="grid">
-              <img src="Thumbnail6.png" alt="thumbnail 6">
-              <img src="Thumbnail5.png" alt="thumbnail 5">
-              <img src="Thumbnail1.png" alt="thumbnail 1">
-              <img src="Thumbnail2.png" alt="thumbnail 2">
-              <img src="Thumbnail3.png" alt="thumbnail 3">
-              <img src="Thumbnail4.png" alt="thumbnail 4">
+            <div class="grid" data-category="thumbnails">
+              <img src="Thumbnail6.png" alt="thumbnail 6" data-img="Thumbnail6.png">
+              <img src="Thumbnail5.png" alt="thumbnail 5" data-img="Thumbnail5.png">
+              <img src="Thumbnail1.png" alt="thumbnail 1" data-img="Thumbnail1.png">
+              <img src="Thumbnail2.png" alt="thumbnail 2" data-img="Thumbnail2.png">
+              <img src="Thumbnail3.png" alt="thumbnail 3" data-img="Thumbnail3.png">
+              <img src="Thumbnail4.png" alt="thumbnail 4" data-img="Thumbnail4.png">
             </div>
           </div>
         </div>
         <div class="acc-item">
           <div class="acc-header">Profile Pictures</div>
           <div class="acc-content">
-            <div class="grid">
-              <img src="pfp5.png" alt="pfp 5">
-              <img src="pfp1.png" alt="pfp 1">
-              <img src="pfp3.png" alt="pfp 3">
-              <img src="pfp4.png" alt="pfp 4">
-              <img src="pfp2.png" alt="pfp 2">
+            <div class="grid" data-category="pfps">
+              <img src="pfp5.png" alt="pfp 5" data-img="pfp5.png">
+              <img src="pfp1.png" alt="pfp 1" data-img="pfp1.png">
+              <img src="pfp3.png" alt="pfp 3" data-img="pfp3.png">
+              <img src="pfp4.png" alt="pfp 4" data-img="pfp4.png">
+              <img src="pfp2.png" alt="pfp 2" data-img="pfp2.png">
             </div>
           </div>
         </div>
@@ -352,10 +529,10 @@
         <div class="acc-item">
           <div class="acc-header">Before & After (Thumbnails)</div>
           <div class="acc-content">
-            <div class="grid">
-              <img src="BF1.png" alt="before after 1">
-              <img src="BF2.png" alt="before after 2">
-              <img src="BF3.png" alt="before after 3">
+            <div class="grid" data-category="before-after">
+              <img src="BF1.png" alt="before after 1" data-img="BF1.png">
+              <img src="BF2.png" alt="before after 2" data-img="BF2.png">
+              <img src="BF3.png" alt="before after 3" data-img="BF3.png">
             </div>
           </div>
         </div>
@@ -378,10 +555,289 @@
     <div id="lightbox-right">&#10095;</div>
     <div id="lightbox-counter"></div>
   </div>
+
+  <!-- Analytics Password Overlay -->
+  <div id="analytics-password-overlay">
+    <div class="box">
+      <h2>🔒 Analytics Access</h2>
+      <p>Enter the secret key to view analytics</p>
+      <input type="password" id="analytics-password-input" placeholder="Enter password..." autocomplete="off">
+      <button id="analytics-password-submit">Unlock</button>
+      <div class="error" id="analytics-password-error">Incorrect password. Try again.</div>
+    </div>
+  </div>
+
+  <!-- Analytics Panel -->
+  <div id="analytics-panel">
+    <button class="close-analytics" id="close-analytics">×</button>
+    <h3>📊 Portfolio Analytics</h3>
+    <div class="stat">
+      <span class="stat-label">Total Visitors</span>
+      <span class="stat-value" id="total-visitors">0</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Total Image Clicks</span>
+      <span class="stat-value" id="total-clicks">0</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Unique Visitors</span>
+      <span class="stat-value" id="unique-visitors">0</span>
+    </div>
+    <div class="image-clicks">
+      <div style="font-weight:600;color:#fff;margin:12px 0 8px 0;font-size:14px;">Most Clicked Images</div>
+      <div id="click-list"></div>
+    </div>
+    <div class="analytics-secret">🔐 Private — Only visible to you</div>
+  </div>
+
   <script src="https://unpkg.com/skinview3d/bundles/skinview3d.bundle.js">
   </script>
   <script>
     (function() {
+      // --- Analytics System ---
+      const ANALYTICS_KEY = 'plodroid_analytics';
+      const VISITOR_KEY = 'plodroid_visitor_id';
+      const SECRET_PASSWORD = 'plodroid2026';
+
+      // Get or create visitor ID
+      function getVisitorId() {
+        let id = localStorage.getItem(VISITOR_KEY);
+        if (!id) {
+          id = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+          localStorage.setItem(VISITOR_KEY, id);
+        }
+        return id;
+      }
+
+      // Initialize analytics data
+      function getAnalytics() {
+        try {
+          const data = localStorage.getItem(ANALYTICS_KEY);
+          return data ? JSON.parse(data) : {
+            totalVisitors: 0,
+            uniqueVisitors: new Set(),
+            totalClicks: 0,
+            imageClicks: {}
+          };
+        } catch {
+          return {
+            totalVisitors: 0,
+            uniqueVisitors: new Set(),
+            totalClicks: 0,
+            imageClicks: {}
+          };
+        }
+      }
+
+      function saveAnalytics(data) {
+        // Convert Set to array for storage
+        const toStore = {
+          totalVisitors: data.totalVisitors,
+          uniqueVisitors: Array.from(data.uniqueVisitors),
+          totalClicks: data.totalClicks,
+          imageClicks: data.imageClicks
+        };
+        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(toStore));
+      }
+
+      function loadAnalytics() {
+        try {
+          const stored = localStorage.getItem(ANALYTICS_KEY);
+          if (!stored) return null;
+          const parsed = JSON.parse(stored);
+          return {
+            totalVisitors: parsed.totalVisitors || 0,
+            uniqueVisitors: new Set(parsed.uniqueVisitors || []),
+            totalClicks: parsed.totalClicks || 0,
+            imageClicks: parsed.imageClicks || {}
+          };
+        } catch {
+          return null;
+        }
+      }
+
+      // Track visitor
+      function trackVisitor() {
+        let data = loadAnalytics();
+        if (!data) {
+          data = {
+            totalVisitors: 0,
+            uniqueVisitors: new Set(),
+            totalClicks: 0,
+            imageClicks: {}
+          };
+        }
+
+        const visitorId = getVisitorId();
+
+        // Check if this is a new unique visitor
+        if (!data.uniqueVisitors.has(visitorId)) {
+          data.uniqueVisitors.add(visitorId);
+          data.totalVisitors += 1;
+          saveAnalytics(data);
+        }
+      }
+
+      // Track image click
+      function trackImageClick(imageName) {
+        let data = loadAnalytics();
+        if (!data) {
+          data = {
+            totalVisitors: 0,
+            uniqueVisitors: new Set(),
+            totalClicks: 0,
+            imageClicks: {}
+          };
+        }
+
+        data.totalClicks += 1;
+        if (!data.imageClicks[imageName]) {
+          data.imageClicks[imageName] = 0;
+        }
+        data.imageClicks[imageName] += 1;
+        saveAnalytics(data);
+      }
+
+      // Get click count for an image
+      function getClickCount(imageName) {
+        const data = loadAnalytics();
+        return data && data.imageClicks[imageName] ? data.imageClicks[imageName] : 0;
+      }
+
+      // --- Track visitor on page load ---
+      trackVisitor();
+
+      // --- Track image clicks ---
+      document.querySelectorAll('.grid img').forEach(img => {
+        img.addEventListener('click', function(e) {
+          const imageName = this.getAttribute('data-img') || this.src.split('/').pop();
+          trackImageClick(imageName);
+        });
+      });
+
+      // --- Analytics UI ---
+      const passwordOverlay = document.getElementById('analytics-password-overlay');
+      const analyticsPanel = document.getElementById('analytics-panel');
+      const passwordInput = document.getElementById('analytics-password-input');
+      const passwordSubmit = document.getElementById('analytics-password-submit');
+      const passwordError = document.getElementById('analytics-password-error');
+      const closeBtn = document.getElementById('close-analytics');
+
+      // Check if already authenticated
+      let isAuthenticated = sessionStorage.getItem('analytics_auth') === 'true';
+
+      function showAnalytics() {
+        if (isAuthenticated) {
+          updateAnalyticsDisplay();
+          analyticsPanel.classList.add('visible');
+          passwordOverlay.classList.remove('visible');
+        } else {
+          passwordOverlay.classList.add('visible');
+          passwordInput.value = '';
+          passwordError.style.display = 'none';
+          passwordInput.focus();
+        }
+      }
+
+      function hideAnalytics() {
+        analyticsPanel.classList.remove('visible');
+        passwordOverlay.classList.remove('visible');
+      }
+
+      function updateAnalyticsDisplay() {
+        const data = loadAnalytics();
+        if (!data) return;
+
+        document.getElementById('total-visitors').textContent = data.totalVisitors || 0;
+        document.getElementById('unique-visitors').textContent = data.uniqueVisitors.size || 0;
+        document.getElementById('total-clicks').textContent = data.totalClicks || 0;
+
+        // Sort image clicks by count
+        const sorted = Object.entries(data.imageClicks || {})
+          .sort((a, b) => b[1] - a[1]);
+
+        const listContainer = document.getElementById('click-list');
+        listContainer.innerHTML = '';
+
+        if (sorted.length === 0) {
+          listContainer.innerHTML = '<div style="color:#666;font-size:13px;padding:8px 0;">No image clicks yet</div>';
+        } else {
+          sorted.forEach(([name, count]) => {
+            const div = document.createElement('div');
+            div.className = 'click-item';
+            div.innerHTML = `
+              <span class="img-name">${name}</span>
+              <span class="click-count">${count} click${count > 1 ? 's' : ''}</span>
+            `;
+            listContainer.appendChild(div);
+          });
+        }
+      }
+
+      // Secret key combination to open analytics (triple click on logo)
+      let logoClickCount = 0;
+      let logoClickTimer = null;
+
+      document.querySelector('.logo').addEventListener('click', function(e) {
+        logoClickCount++;
+        if (logoClickTimer) clearTimeout(logoClickTimer);
+        logoClickTimer = setTimeout(() => {
+          logoClickCount = 0;
+        }, 800);
+
+        if (logoClickCount >= 3) {
+          logoClickCount = 0;
+          clearTimeout(logoClickTimer);
+          showAnalytics();
+        }
+      });
+
+      // Password submission
+      passwordSubmit.addEventListener('click', function() {
+        if (passwordInput.value === SECRET_PASSWORD) {
+          isAuthenticated = true;
+          sessionStorage.setItem('analytics_auth', 'true');
+          passwordError.style.display = 'none';
+          showAnalytics();
+        } else {
+          passwordError.style.display = 'block';
+          passwordInput.value = '';
+          passwordInput.focus();
+        }
+      });
+
+      passwordInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          passwordSubmit.click();
+        }
+      });
+
+      // Close analytics
+      closeBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        hideAnalytics();
+      });
+
+      // Click outside to close
+      document.addEventListener('click', function(e) {
+        if (analyticsPanel.classList.contains('visible')) {
+          if (!analyticsPanel.contains(e.target) && e.target.id !== 'analytics-toggle') {
+            // Don't close if clicking on the logo (re-trigger)
+            if (!e.target.closest('.logo')) {
+              hideAnalytics();
+            }
+          }
+        }
+      });
+
+      // Escape key to close
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          hideAnalytics();
+        }
+      });
+
+      // --- Sidebar and other existing functionality ---
       const sidebar = document.querySelector(".sidebar");
       const toggleBtn = document.querySelector(".toggle");
 
@@ -405,8 +861,8 @@
         };
       });
 
+      // --- Skin Viewer ---
       const container = document.getElementById("skin_container");
-
       const skinUrl = "https://mc-heads.net/skin/realPlodroid";
 
       const viewer = new skinview3d.SkinViewer({
@@ -430,12 +886,13 @@
       window.addEventListener("resize", resizeSkinViewer);
       setTimeout(resizeSkinViewer, 50);
 
+      // --- Lightbox ---
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
       const lightboxCounter = document.getElementById("lightbox-counter");
       const leftArrow = document.getElementById("lightbox-left");
       const rightArrow = document.getElementById("lightbox-right");
-      const closeBtn = document.getElementById("lightbox-close");
+      const closeLightboxBtn = document.getElementById("lightbox-close");
 
       let currentGalleryImages = [];
       let currentIndex = 0;
@@ -447,6 +904,12 @@
         if (images.length === 0) return;
         currentGalleryImages = images;
         currentIndex = images.indexOf(imgElement);
+
+        // Track the click for analytics (already tracked separately)
+        // But also track from lightbox if needed
+        const imgName = imgElement.getAttribute('data-img') || imgElement.src.split('/').pop();
+        // Already tracked in the click handler, but we track again in case lightbox is opened differently
+
         showLightboxImage(images[currentIndex].src);
         lightbox.style.display = 'flex';
         document.body.style.overflow = 'hidden';
@@ -470,8 +933,11 @@
         document.body.style.overflow = '';
       }
 
+      // Override image clicks to track analytics
       document.querySelectorAll(".grid img").forEach(img => {
         img.addEventListener("click", function(e) {
+          // Track analytics (already tracked in the main click handler above)
+          // But we need to open the lightbox
           openLightbox(e.target);
         });
       });
@@ -482,7 +948,7 @@
         }
       });
 
-      closeBtn.addEventListener("click", function(e) {
+      closeLightboxBtn.addEventListener("click", function(e) {
         e.stopPropagation();
         closeLightbox();
       });
@@ -516,6 +982,17 @@
             e.preventDefault();
             rightArrow.click();
           }
+        }
+        if (e.key === 'Escape' && analyticsPanel.classList.contains('visible')) {
+          hideAnalytics();
+        }
+      });
+
+      // Add keyboard shortcut: Ctrl+Shift+A to open analytics
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+          e.preventDefault();
+          showAnalytics();
         }
       });
     })();
