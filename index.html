@@ -266,8 +266,6 @@
       border-radius: 20px;
       z-index: 3001;
     }
-
-    /* Analytics Styles - Hidden by default */
     #analytics-panel {
       display: none;
       position: fixed;
@@ -350,8 +348,6 @@
       border-top: 1px solid rgba(255,255,255,0.05);
       padding-top: 12px;
     }
-
-    /* Analytics toggle button - hidden by default, shown with secret key combo */
     #analytics-toggle {
       display: none;
       position: fixed;
@@ -370,8 +366,6 @@
     #analytics-toggle:hover {
       background: rgba(255, 255, 255, 0.1);
     }
-
-    /* Password Overlay */
     #analytics-password-overlay {
       display: none;
       position: fixed;
@@ -436,7 +430,6 @@
       margin-top: 10px;
       display: none;
     }
-
     @media(max-width:900px) {
       main {
         margin-left: 0;
@@ -558,8 +551,6 @@
     <div id="lightbox-right">&#10095;</div>
     <div id="lightbox-counter"></div>
   </div>
-
-  <!-- Analytics Password Overlay -->
   <div id="analytics-password-overlay">
     <div class="box">
       <h2>🔒 Analytics Access</h2>
@@ -569,8 +560,6 @@
       <div class="error" id="analytics-password-error">Incorrect password. Try again.</div>
     </div>
   </div>
-
-  <!-- Analytics Panel -->
   <div id="analytics-panel">
     <button class="close-analytics" id="close-analytics">×</button>
     <h3>📊 Portfolio Analytics</h3>
@@ -592,17 +581,14 @@
     </div>
     <div class="analytics-secret">🔐 Private — Only visible to you</div>
   </div>
-
   <script src="https://unpkg.com/skinview3d/bundles/skinview3d.bundle.js">
   </script>
   <script>
     (function() {
-      // --- Analytics System ---
       const ANALYTICS_KEY = 'plodroid_analytics';
       const VISITOR_KEY = 'plodroid_visitor_id';
       const SECRET_PASSWORD = 'plodroid2026';
 
-      // Get or create visitor ID
       function getVisitorId() {
         let id = localStorage.getItem(VISITOR_KEY);
         if (!id) {
@@ -612,7 +598,6 @@
         return id;
       }
 
-      // Initialize analytics data
       function getAnalytics() {
         try {
           const data = localStorage.getItem(ANALYTICS_KEY);
@@ -633,7 +618,6 @@
       }
 
       function saveAnalytics(data) {
-        // Convert Set to array for storage
         const toStore = {
           totalVisitors: data.totalVisitors,
           uniqueVisitors: Array.from(data.uniqueVisitors),
@@ -659,7 +643,6 @@
         }
       }
 
-      // Track visitor
       function trackVisitor() {
         let data = loadAnalytics();
         if (!data) {
@@ -673,7 +656,6 @@
 
         const visitorId = getVisitorId();
 
-        // Check if this is a new unique visitor
         if (!data.uniqueVisitors.has(visitorId)) {
           data.uniqueVisitors.add(visitorId);
           data.totalVisitors += 1;
@@ -681,7 +663,6 @@
         }
       }
 
-      // Track image click
       function trackImageClick(imageName) {
         let data = loadAnalytics();
         if (!data) {
@@ -701,16 +682,13 @@
         saveAnalytics(data);
       }
 
-      // Get click count for an image
       function getClickCount(imageName) {
         const data = loadAnalytics();
         return data && data.imageClicks[imageName] ? data.imageClicks[imageName] : 0;
       }
 
-      // --- Track visitor on page load ---
       trackVisitor();
 
-      // --- Track image clicks ---
       document.querySelectorAll('.grid img').forEach(img => {
         img.addEventListener('click', function(e) {
           const imageName = this.getAttribute('data-img') || this.src.split('/').pop();
@@ -718,7 +696,6 @@
         });
       });
 
-      // --- Analytics UI ---
       const passwordOverlay = document.getElementById('analytics-password-overlay');
       const analyticsPanel = document.getElementById('analytics-panel');
       const passwordInput = document.getElementById('analytics-password-input');
@@ -726,7 +703,6 @@
       const passwordError = document.getElementById('analytics-password-error');
       const closeBtn = document.getElementById('close-analytics');
 
-      // Check if already authenticated
       let isAuthenticated = sessionStorage.getItem('analytics_auth') === 'true';
 
       function showAnalytics() {
@@ -755,7 +731,6 @@
         document.getElementById('unique-visitors').textContent = data.uniqueVisitors.size || 0;
         document.getElementById('total-clicks').textContent = data.totalClicks || 0;
 
-        // Sort image clicks by count
         const sorted = Object.entries(data.imageClicks || {})
           .sort((a, b) => b[1] - a[1]);
 
@@ -777,7 +752,6 @@
         }
       }
 
-      // Secret key combination to open analytics (triple click on logo)
       let logoClickCount = 0;
       let logoClickTimer = null;
 
@@ -795,7 +769,6 @@
         }
       });
 
-      // Password submission
       passwordSubmit.addEventListener('click', function() {
         if (passwordInput.value === SECRET_PASSWORD) {
           isAuthenticated = true;
@@ -815,17 +788,14 @@
         }
       });
 
-      // Close analytics
       closeBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         hideAnalytics();
       });
 
-      // Click outside to close
       document.addEventListener('click', function(e) {
         if (analyticsPanel.classList.contains('visible')) {
           if (!analyticsPanel.contains(e.target) && e.target.id !== 'analytics-toggle') {
-            // Don't close if clicking on the logo (re-trigger)
             if (!e.target.closest('.logo')) {
               hideAnalytics();
             }
@@ -833,14 +803,12 @@
         }
       });
 
-      // Escape key to close
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           hideAnalytics();
         }
       });
 
-      // --- Sidebar and other existing functionality ---
       const sidebar = document.querySelector(".sidebar");
       const toggleBtn = document.querySelector(".toggle");
 
@@ -864,7 +832,6 @@
         };
       });
 
-      // --- Skin Viewer ---
       const container = document.getElementById("skin_container");
       const skinUrl = "https://mc-heads.net/skin/realPlodroid";
 
@@ -889,7 +856,6 @@
       window.addEventListener("resize", resizeSkinViewer);
       setTimeout(resizeSkinViewer, 50);
 
-      // --- Lightbox ---
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
       const lightboxCounter = document.getElementById("lightbox-counter");
@@ -908,10 +874,7 @@
         currentGalleryImages = images;
         currentIndex = images.indexOf(imgElement);
 
-        // Track the click for analytics (already tracked separately)
-        // But also track from lightbox if needed
         const imgName = imgElement.getAttribute('data-img') || imgElement.src.split('/').pop();
-        // Already tracked in the click handler, but we track again in case lightbox is opened differently
 
         showLightboxImage(images[currentIndex].src);
         lightbox.style.display = 'flex';
@@ -936,11 +899,8 @@
         document.body.style.overflow = '';
       }
 
-      // Override image clicks to track analytics
       document.querySelectorAll(".grid img").forEach(img => {
         img.addEventListener("click", function(e) {
-          // Track analytics (already tracked in the main click handler above)
-          // But we need to open the lightbox
           openLightbox(e.target);
         });
       });
@@ -991,7 +951,6 @@
         }
       });
 
-      // Add keyboard shortcut: Ctrl+Shift+A to open analytics
       document.addEventListener('keydown', function(e) {
         if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
           e.preventDefault();
