@@ -513,6 +513,7 @@
     #skin_container {
       position: absolute;
       inset: 0;
+      z-index: 1;
     }
 
     #skin_container canvas {
@@ -534,6 +535,7 @@
       -webkit-backdrop-filter: blur(18px);
       color: #e6e2da;
       pointer-events: none;
+      z-index: 5;
     }
 
     .skin-overlay small {
@@ -565,6 +567,7 @@
       font-weight: 700;
       letter-spacing: .08em;
       text-transform: uppercase;
+      z-index: 5;
     }
 
     .stage-toast {
@@ -1378,7 +1381,6 @@
   <div class="nav-wrap" id="navWrap">
     <nav class="navigation" aria-label="Main navigation">
       <a class="nav-brand" href="#about" aria-label="Plodroid home">
-        <span class="brand-dot"></span>
         Plodroid
       </a>
       <div class="nav-divider brand-divider"></div>
@@ -1436,7 +1438,7 @@
             <div class="skin-badge">realPlodroid</div>
             <div class="skin-overlay">
               <small>Minecraft persona</small>
-              <strong>Same blocky guy. Better lighting.</strong>
+              <strong>Minecraft, but make it mine.</strong>
             </div>
           </div>
         </div>
