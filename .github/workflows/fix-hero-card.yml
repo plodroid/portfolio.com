@@ -1,0 +1,52 @@
+name: Fix portfolio hero card
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-hero-card.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch hero card
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+
+          text = text.replace('        <span class="brand-dot"></span>\n        Plodroid', '        Plodroid')
+          text = text.replace('Same blocky guy. Better lighting.', 'Minecraft, but make it mine.')
+
+          text = text.replace(
+              '    #skin_container {\n      position: absolute;\n      inset: 0;\n    }',
+              '    #skin_container {\n      position: absolute;\n      inset: 0;\n      z-index: 1;\n    }'
+          )
+          text = text.replace(
+              '      color: #e6e2da;\n      pointer-events: none;\n    }\n\n    .skin-overlay small',
+              '      color: #e6e2da;\n      pointer-events: none;\n      z-index: 5;\n    }\n\n    .skin-overlay small'
+          )
+          text = text.replace(
+              '      text-transform: uppercase;\n    }\n\n    .stage-toast',
+              '      text-transform: uppercase;\n      z-index: 5;\n    }\n\n    .stage-toast'
+          )
+
+          p.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit fix
+        run: |
+          if git diff --quiet; then
+            echo "Nothing to change"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- index.html
+          git commit -m "Fix Minecraft hero card layering and copy"
+          git push
